@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"main/path"
 	"net/http"
+	"github.com/bouyx/lan-admin/handler"
 	//_ "github.com/lib/pq"
 )
 
@@ -26,7 +26,7 @@ func main() {
 	// defer db.Close()
 	// fmt.Println("db connected")
 
-	http.HandleFunc("/api/login", path.Login)
+	http.HandleFunc("/api/login", handler.Login)
 
 	fmt.Println("listen 8080")
 	http.ListenAndServe(":8080", nil)

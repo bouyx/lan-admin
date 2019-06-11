@@ -5,6 +5,7 @@ import (
 	"os"
 	"net/http"
 	"github.com/bouyx/lan-admin/handler"
+	"github.com/gorilla/mux"
 	//"github.com/gin-gonic/gin"
 	//_ "github.com/lib/pq"
 )
@@ -18,6 +19,8 @@ import (
 // )
 
 func main() {
+	//DB
+
 	// psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 	// 	"password=%s dbname=%s sslmode=disable",
 	// 	host, port, user, password, dbname)
@@ -28,10 +31,20 @@ func main() {
 	// defer db.Close()
 	// fmt.Println("db connected")
 
-	http.HandleFunc("/api/login", handler.Login)
+	//Vanilla
+
+	// http.HandleFunc("/api/login", handler.Login)
+	// port:= os.Getenv("PORT")
+	// fmt.Println("listen : "+port)
+	// http.ListenAndServe(":"+port, nil)
+
+	//mux 
+	r := mux.NewRouter()
+	r.HandleFunc("/login", handler.Loginmux).Methods("POST")
 	port:= os.Getenv("PORT")
 	fmt.Println("listen : "+port)
-	http.ListenAndServe(":"+port, nil)
+	http.ListenAndServe(":"+port, r)
+
 
 	// router := gin.New()
 	// router.Use(gin.Logger())

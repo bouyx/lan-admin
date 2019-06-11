@@ -3,7 +3,7 @@ package handler
 import (
 	"encoding/json"
 	"net/http"
-	"github.com/gin-gonic/gin"
+	
 )
 
 func Login(w http.ResponseWriter, r *http.Request) {
@@ -14,11 +14,5 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(map[string]string{"message": "logged"})
 
 	}
-}
-
-func Logingin(c *gin.Context){
-	c.JSON(200, gin.H{
-		"message": "suce",
-	})
 }
 

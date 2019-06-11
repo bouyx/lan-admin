@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"net/http"
 	"github.com/bouyx/lan-admin/handler"
+	"github.com/gin-gonic/gin"
 	//_ "github.com/lib/pq"
 )
 
@@ -29,5 +31,12 @@ func main() {
 	http.HandleFunc("/api/login", handler.Login)
 
 	fmt.Println("listen 8080")
-	http.ListenAndServe(":8080", nil)
+	// http.ListenAndServe(":8080", nil)
+
+	router := gin.New()
+	router.Use(gin.Logger())
+	router.GET("/login", handler.Logingin)
+	port:= os.Getenv("PORT")
+	fmt.Println("listen : "+ port)
+	router.Run(":"+port)
 }

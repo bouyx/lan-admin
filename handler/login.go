@@ -1,9 +1,10 @@
 package handler
 
 import (
-	"encoding/json"
-	"net/http"
-	"github.com/gorilla/mux"
+	// "encoding/json"
+	// "net/http"
+	// "github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 	
 )
 
@@ -17,13 +18,18 @@ import (
 // 	}
 // }
 
-func Loginmux(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
+// func Loginmux(w http.ResponseWriter, r *http.Request) {
+// 	params := mux.Vars(r)
 	
-	w.Header().Set("Content-Type", "application/json")
+// 	w.Header().Set("Content-Type", "application/json")
 
-		w.WriteHeader(200)
-		json.NewEncoder(w).Encode(map[string]string{"message": params["zboub"]})
+// 		w.WriteHeader(200)
+// 		json.NewEncoder(w).Encode(map[string]string{"message": params["zboub"]})
 
+// }
+
+func Logingin(c *gin.Context){
+	c.JSON(200, gin.H{
+		"message": "suce",
+	})
 }
-

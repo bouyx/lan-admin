@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 	"os"
-	"net/http"
+	//"net/http"
 	"github.com/bouyx/lan-admin/handler"
-	"github.com/gorilla/mux"
-	//"github.com/gin-gonic/gin"
+	//"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 	//_ "github.com/lib/pq"
 )
 
@@ -39,17 +39,17 @@ func main() {
 	// http.ListenAndServe(":"+port, nil)
 
 	//mux 
-	r := mux.NewRouter()
-	r.HandleFunc("/login", handler.Loginmux).Methods("POST")
-	port:= os.Getenv("PORT")
-	fmt.Println("listen : "+port)
-	http.ListenAndServe(":"+port, r)
-
-
-	// router := gin.New()
-	// router.Use(gin.Logger())
-	// router.GET("/login", handler.Logingin)
+	// r := mux.NewRouter()
+	// r.HandleFunc("/login", handler.Loginmux).Methods("POST")
 	// port:= os.Getenv("PORT")
-	// fmt.Println("listen : "+ port)
-	// router.Run(":"+port)
+	// fmt.Println("listen : "+port)
+	// http.ListenAndServe(":"+port, r)
+
+
+	router := gin.New()
+	router.Use(gin.Logger())
+	router.GET("/login", handler.Logingin)
+	port:= os.Getenv("PORT")
+	fmt.Println("listen : "+ port)
+	router.Run(":"+port)
 }

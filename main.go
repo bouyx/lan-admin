@@ -3,33 +3,39 @@ package main
 import (
 	"fmt"
 	"os"
+	"database/sql"
 	//"net/http"
 	"github.com/bouyx/lan-admin/handler"
 	//"github.com/gorilla/mux"
 	"github.com/gin-gonic/gin"
-	//_ "github.com/lib/pq"
+	_"github.com/lib/pq"
 )
 
-// const (
-// 	host     = "localhost"
-// 	port     = 5432
-// 	user     = "postgres"
-// 	password = "postgres"
-// 	dbname   = "lanManager"
-// )
+const (
+	host     = "ec2-54-247-178-166.eu-west-1.compute.amazonaws.com"
+	port     = 5432
+	user     = "bezndebsgvcvwv"
+	password = "692ef0db5ffae312f5430650ce25468d2c8b890958c390fca22551cddc34a3a2"
+	dbname   = "d2ln1u49tklonv"
+)
 
 func main() {
 	//DB
 
-	// psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
-	// 	"password=%s dbname=%s sslmode=disable",
-	// 	host, port, user, password, dbname)
-	// db, err := sql.Open("postgres", psqlInfo)
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// defer db.Close()
-	// fmt.Println("db connected")
+	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
+		"password=%s dbname=%s",
+		host, port, user, password, dbname)
+	db, err := sql.Open("postgres", psqlInfo)
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
+
+	err = db.Ping()
+	if err != nil {
+	panic(err)
+	}
+	fmt.Println("db connected")
 
 	//Vanilla
 

@@ -3,42 +3,20 @@ package main
 import (
 	"fmt"
 	"os"
-	"database/sql"
+
 	//"net/http"
 	"github.com/bouyx/lan-admin/handler"
+	"github.com/bouyx/lan-admin/data"
 	//"github.com/gorilla/mux"
 	"github.com/gin-gonic/gin"
 	_"github.com/lib/pq"
 )
 
-const (
-	host     = "ec2-54-247-178-166.eu-west-1.compute.amazonaws.com"
-	port     = 5432
-	user     = "bezndebsgvcvwv"
-	password = "692ef0db5ffae312f5430650ce25468d2c8b890958c390fca22551cddc34a3a2"
-	dbname   = "d2ln1u49tklonv"
-)
-
 func main() {
 	//DB
-
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
-		"password=%s dbname=%s",
-		host, port, user, password, dbname)
-	db, err := sql.Open("postgres", psqlInfo)
-	if err != nil {
-		panic(err)
-	}
-	defer db.Close()
-
-	err = db.Ping()
-	if err != nil {
-	panic(err)
-	}
-	fmt.Println("db connected")
+	data.Start()
 
 	//Vanilla
-
 	// http.HandleFunc("/api/login", handler.Login)
 	// port:= os.Getenv("PORT")
 	// fmt.Println("listen : "+port)
@@ -52,9 +30,14 @@ func main() {
 	// http.ListenAndServe(":"+port, r)
 
 
-	router := gin.New()
-	router.Use(gin.Logger())
-	router.GET("/login", handler.Logingin)
+	router := gin.Default()
+	v1 := router.Group("/api/v1")
+	v1.Use(gin.Logger())
+	v1.GET("/login", handler.Logingin)
+	v1.GET("/users", handler.GetAllUsersHandler)
+	v1.GET("/users/:id", handler.GetUsersHandler)
+	v1.POST("/users/", handler.PostUsersHandler)
+	v1.PUT("/users/:id", handler.PutUsersHandler)
 	port:= os.Getenv("PORT")
 	fmt.Println("listen : "+ port)
 	router.Run(":"+port)

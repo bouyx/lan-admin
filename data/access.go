@@ -100,3 +100,17 @@ func CreateUser(user UserData)(id int){
 	return
 }
 
+func UpdateUser(user UserData){ 
+	_,err := db.Exec(`UPDATE users SET name = $2, email = $3 WHERE id = $1`, user.ID, user.Username, user.Email)
+	if err != nil {
+		panic(err)
+	}
+}
+
+func DeleteUser(id int){ 
+	_,err := db.Exec(`DELETE FROM users WHERE id = $1`, id)
+	if err != nil {
+		panic(err)
+	}
+}
+

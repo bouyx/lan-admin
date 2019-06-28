@@ -17,3 +17,11 @@ func getUsers(id int)data.UserData{
 func createUser(user data.UserData)int{
 	return data.CreateUser(user)
 }
+
+func updateUser(user data.UserData){
+	data.UpdateUser(user)
+}
+
+func deleteUser(id int){
+	data.DeleteUser(id)
+}

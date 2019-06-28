@@ -38,6 +38,7 @@ func main() {
 	v1.GET("/users/:id", handler.GetUsersHandler)
 	v1.POST("/users", handler.PostUsersHandler)
 	v1.PUT("/users/:id", handler.PutUsersHandler)
+	v1.DELETE("/users/:id", handler.DeleteUsersHandler)
 	port:= os.Getenv("PORT")
 	fmt.Println("listen : "+ port)
 	router.Run(":"+port)

@@ -29,8 +29,20 @@ func PostUsersHandler(c *gin.Context){
 }
 
 func PutUsersHandler(c *gin.Context){
-	id := c.Param("id")
-	c.JSON(200, gin.H{
-		"message": id,
-	})
+	var user data.UserData
+	if err := c.ShouldBindJSON(&user); err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+	updateUser(user)
+	c.JSON(200, getUsers(user.ID),)
+}
+
+func DeleteUsersHandler(c *gin.Context){
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		panic(err)
+	}
+	deleteUser(id)
+	c.Status(200)
 }

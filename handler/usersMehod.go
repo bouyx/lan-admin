@@ -13,3 +13,7 @@ func getUsers(id int)data.UserData{
 
 	return data.GetUsers(id)
 }
+
+func createUser(user data.UserData)int{
+	return data.CreateUser(user)
+}

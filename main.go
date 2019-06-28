@@ -36,7 +36,7 @@ func main() {
 	v1.GET("/login", handler.Logingin)
 	v1.GET("/users", handler.GetAllUsersHandler)
 	v1.GET("/users/:id", handler.GetUsersHandler)
-	v1.POST("/users/", handler.PostUsersHandler)
+	v1.POST("/users", handler.PostUsersHandler)
 	v1.PUT("/users/:id", handler.PutUsersHandler)
 	port:= os.Getenv("PORT")
 	fmt.Println("listen : "+ port)
